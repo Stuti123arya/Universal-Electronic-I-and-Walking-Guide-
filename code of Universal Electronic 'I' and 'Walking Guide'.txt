@@ -1,0 +1,291 @@
+#!/usr/bin/env python
+import time
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+print "start"
+
+
+trigPin1=2
+echoPin1=3
+trigPin2=4
+echoPin2=17
+trigPin3=27
+echoPin3=22
+trigPin4=10
+echoPin4=9
+trigPin5=14 #hat
+echoPin5=15
+trigPin6=18
+echoPin6=23
+trigPin7=24
+echoPin7=25
+trigPin8=8
+echoPin8=7
+
+motorPin1=43#motor
+motorPin2=49
+motorPin3=45
+motorPin4=47
+ledPin=13
+alpha=0.75
+change=0.0
+
+print "calculating pulse rate"
+oldvalue=0
+oldchange=0
+GPIO.INPUT(sensorPin,GPIO.IN)
+value=alpha*oldvalue+(1-alpha)*rawvalue
+oldvalue=value
+time.sleep(period)
+summ=rawvalue+value
+newvalue=(6000/sum)+10
+if  newvalue>55 and newvalue<80  :
+    print "heartbeat value is:"+newvalue
+
+    
+sonarSensor(trigPin1,echoPin1)
+FrontSensor = distance
+SonarSensor(trigPin2,echoPin2)
+LeftSensor = distance
+SonarSensor(trigPin3,echoPin3)
+RightSensor = distance
+SonarSensor(trigPin4,echoPin4)
+BackSensor = distance
+SonarSensor(trigPin5,echoPin5)
+FrontSensor1 = distance
+SonarSensor(trigPin6,echoPin6)
+LeftSensor1 = distance
+SonarSensor(trigPin7,echoPin7)
+RightSensor1 = distance
+SonarSensor(trigPin8,echoPin8)
+BackSensor1 = distance
+
+print "leftsensor:"+LeftSensor
+print "frontsensor:"+FrontSensor
+print "rightsensor:"+RightSensor
+print "backsensor:"+BackSensor
+
+print "leftsensor1:"+LeftSensor1
+print "frontsensor1:"+FrontSensor1
+print "rightsensor1:"+RightSensor1
+print "backsensor1:"+BackSensor1
+
+
+print "Distance measurement in progress"
+
+#belt sesnor or hat sensor single case
+if   LeftSensor >= 0 and LeftSensor<=50 and RightSensor>50 and FrontSensor>50 and BackSensor>50  or   LeftSensor1 >= 0 and LeftSensor1<=50 and RightSensor1>50 and FrontSensor1>50 and BackSensor1>50  :
+ print "move forward"
+ print "only left"
+ time.sleep(1000)
+ motor(motorPin1)
+
+ 
+if   RightSensor >=0 and RightSensor<=50  and LeftSensor >50 and FrontSensor >50 and BackSensor>50 or  RightSensor1 >=0 and RightSensor1<=50 and LeftSensor1 >50 and FrontSensor1 >50 and BackSensor1>50  :
+ print "move forward"
+ print "only right"
+ time.sleep(1000)
+ motor(motorPin1)
+ 
+if   FrontSensor >=0 and FrontSensor<=50  and RightSensor>50 and LeftSensor >50 and BackSensor>50  or  FrontSensor1 >=0 and FrontSensor1<=50  and RightSensor1>50 and LeftSensor1 >50 and BackSensor1>50  :
+ print "move left"
+ print "only front"
+ time.sleep(1000)
+ motor(motorPin2)
+
+if   BackSensor >=0 and BackSensor<=200  and RightSensor>200 and LeftSensor >200 and FrontSensor>200  or  BackSensor1 >=0 and BackSensor1<=200  and RightSensor1>200 and LeftSensor1 >200 and FrontSensor1>200  :
+ print "move left"
+ print "only back"
+ time.sleep(1000)
+ motor(motorPin2)
+
+ #belt sesnor or hat sensor double case
+if   LeftSensor >=0 and LeftSensor<=50  and RightSensor>50 and FrontSensor>50 and BackSensor>50  and  LeftSensor1 >=0 and LeftSensor1<=50 and RightSensor1>50 and FrontSensor1>50 and BackSensor1>50  :
+ print "move forward"
+ print "only left"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if   RightSensor >=0 and RightSensor<=50 and LeftSensor >50 and FrontSensor >50 and BackSensor>50 and   RightSensor1 >=0 and RightSensor1<=50 and LeftSensor1 >50 and FrontSensor1 >50 and BackSensor1>50  :
+ print "move forward"
+ print "only right"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if   FrontSensor >=0 and FrontSensor<=50  and RightSensor>50 and LeftSensor >50 and BackSensor>50  and  FrontSensor1 >=0 and FrontSensor1<=50 and RightSensor1>50 and LeftSensor1 >50 and BackSensor1>50  :
+ print "move left"
+ print "move forward"
+ print "only front"
+ time.sleep(1000)
+ motor(motorPin2)
+
+if   BackSensor >=0 and BackSensor<=50 and RightSensor>50 and LeftSensor >50 and FrontSensor>50  and   BackSensor1 >=0 and BackSensor1<=50 and RightSensor1>50 and LeftSensor1>50 and FrontSensor1>50  :
+ print "move left"
+ print "move left"
+ print "only back"
+ time.sleep(1000)
+ motor(motorPin2)
+
+#for 2 sensor for single case
+if   LeftSensor >=0 and LeftSensor<=50 and  RightSensor >=0 and RightSensor<=50 and FrontSensor>50 and BackSensor>50 or  LeftSensor1>=0 and LeftSensor1<=50  and  RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1>50 and BackSensor1>50  :
+ print "move forward"
+ print "only left and right"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if   RightSensor >=0 and RightSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and LeftSensor > 50 and BackSensor>50  or RightSensor1 >=0 and RightSensor1<=50  and  FrontSensor1 >=0 and FrontSensor1<=50 and LeftSensor1 > 50 and BackSensor1>50  :
+ print "move left"
+ print "only front and right"
+ time.sleep(1000)
+ motor(motorPin2)
+
+if   LeftSensor >=0 and LeftSensor<=50  and  FrontSensor >=0 and FrontSensor<=50 and RightSensor>50 and BackSensor>50  or  LeftSensor >=0 and LeftSensor<=50  and  FrontSensor >=0 and FrontSensor<=50 and RightSensor>50 and BackSensor>50  :
+ print "move right"
+ print "only front and left"
+ time.sleep(1000)
+ motor(motorPin3)
+
+if   LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor<=50 and RightSensor>50 and  LeftSensor>50  or  LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor<=50 and RightSensor>50 and LeftSensor>50  :
+ print "move forward"
+ print "only back and left"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if  RightSensor >=0 and RightSensor<=50 and BackSensor >=0 and BackSensor<=50 and LeftSensor > 50 and FrontSensor>50 or RightSensor >=0 and RightSensor<=50 and BackSensor >=0 and BackSensor<=50 and LeftSensor > 50 and FrontSensor>50  :
+ print "move forward"
+ print "only back and right"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if   FrontSensor >=0 and FrontSensor<=50  and  BackSensor >=0 and BackSensor<=50 and RightSensor > 50 and LeftSensor>50  or FrontSensor1 >=0 and FrontSensor1<=50 and BackSensor1 >=0 and BackSensor1<=50 and RightSensor1 > 50 and LeftSensor1>50  :
+ print "move left"
+ print "only front and back"
+ time.sleep(1000)
+ motor(motorPin2)
+#2 sensor for double case
+if  LeftSensor >=0 and LeftSensor<=50 and RightSensor >=0 and RightSensor<=50 and FrontSensor>50 and BackSensor>50 and LeftSensor1 >=0 and LeftSensor1<=50 and RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1>50 and BackSensor1>50  :
+ print "move forward"
+ print "only left and right"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if  RightSensor >=0 and RightSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and LeftSensor > 50 and BackSensor>50 and RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1 >=0 and FrontSensor1<=50 and LeftSensor1 > 50 and BackSensor1>50  :
+ print "move left"
+ print "only front and right"
+ time.sleep(1000)
+ motor(motorPin2)
+
+if  LeftSensor >=0 and LeftSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and RightSensor>50 and BackSensor>50 and LeftSensor >=0 and LeftSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and RightSensor>50 and BackSensor>50  :
+ print "move right"
+ print "only left and front"
+ time.sleep(1000)
+ motor(motorPin3)
+
+if  LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor<=50 and RightSensor>50 and LeftSensor>50 and LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor<=50 and RightSensor>50 and LeftSensor>50  :
+ print "move forward"
+ print "only left and back"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if  RightSensor >=0 and RightSensor<=50 and BackSensor >=0 and BackSensor<=50 and  LeftSensor > 50 and FrontSensor>50 and RightSensor >=0 and RightSensor<=50 and BackSensor >=0 and BackSensor<=50 and LeftSensor > 50 and FrontSensor>50  :
+ print "move forward"
+ print "only right and back"
+ time.sleep(1000)
+ motor(motorPin1)
+
+if  FrontSensor >=0 and FrontSensor<=50 and BackSensor >=0 and BackSensor<=50 and RightSensor > 50 and LeftSensor>50 and FrontSensor1 >=0 and FrontSensor1<=50 and BackSensor1 >=0 and BackSensor1<=50 and RightSensor1 > 50 and LeftSensor1>50  :
+ print "move left"
+ print "only front and back"
+ time.sleep(1000)
+ motor(motorPin2)
+
+ #triple cases
+if LeftSensor >=0 and LeftSensor<=50 and RightSensor >=0 and RightSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and BackSensor>50 or LeftSensor1>=0 and LeftSensor1<=50 and RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1 >=0 and FrontSensor1<=50 and BackSensor1>50  :
+ print "move back"
+ print "only front and right and left"
+ time.sleep(1000)
+ motor(motorPin4)
+
+if RightSensor >=0 and RightSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and BackSensor >=0 and BackSensor <= 50 and LeftSensor>50 or RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1 >=0 and FrontSensor1<=50 and BackSensor1 >=0 and BackSensor1 <= 50 and LeftSensor1>50  :
+ print "move left"
+ print "only front and right and back"
+ time.sleep(1000)
+ motor(motorPin2)
+
+if FrontSensor >=0 and FrontSensor<=50 and LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor <= 50 and RightSensor>50 or FrontSensor1 >=0 and FrontSensor1<=50 and LeftSensor1 >=0 and LeftSensor1<=50 and BackSensor1 >=0 and BackSensor1 <= 50 and RightSensor1>50 :
+ print "move right"
+ print "only front and left and back"
+ time.sleep(1000)
+ motor(motorPin3)
+
+ #2 triple case
+if  LeftSensor >=0 and LeftSensor<=50 and RightSensor >=0 and RightSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and BackSensor>50 and LeftSensor1>=0 and LeftSensor1<=50 and RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1 >=0 and FrontSensor1<=50 and BackSensor1>50  :
+ print "move back"
+ print "only front and left and right"
+ time.sleep(1000)
+ motor(motorPin4)
+
+
+if RightSensor >=0 and RightSensor<=50 and FrontSensor >=0 and FrontSensor<=50 and BackSensor >=0 and BackSensor <= 50 and LeftSensor>50 and RightSensor1 >=0 and RightSensor1<=50 and FrontSensor1 >=0 and FrontSensor1<=50 and BackSensor1 >=0 and BackSensor1 <= 50 and LeftSensor1>50  :
+ print "move left"
+ print "only front and back and right"
+ time.sleep(1000)
+ motor(motorPin2)
+
+if FrontSensor >=0 and FrontSensor<=50 and LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor <= 50 and RightSensor1>50 and FrontSensor1 >=0 and FrontSensor1<=50 and LeftSensor1 >=0 and LeftSensor1<=50 and BackSensor1 >=0 and BackSensor1 <= 50 and RightSensor1>50  :
+ print "move right"
+ print "only front and back and left"
+ time.sleep(1000)
+ motor(motorPin3)
+
+
+#all
+if FrontSensor >=0 and FrontSensor<=50 and LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor <= 50 and RightSensor >=0 and RightSensor<=50  or  FrontSensor >=0 and FrontSensor<=50 and LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor <= 50 and RightSensor >=0 and RightSensor<=50  :
+ print "stop"
+ print "only front and back and left and right"
+ time.sleep(1000)
+ motor3(motorPin1,motorPin2,motorPin3,motorPin4)
+
+#2 all
+if  FrontSensor >=0 and FrontSensor<=50 and LeftSensor >=0 and LeftSensor<=50 and BackSensor >=0 and BackSensor <= 50 and RightSensor >=0 and RightSensor<=50 and FrontSensor1 >=0 and FrontSensor1<=50 and LeftSensor1 >=0 and LeftSensor1<=50 and BackSensor1 >=0  and BackSensor1 <= 50 and RightSensor1 >=0 and RightSensor1<=50 :
+ print "stop"
+ print "only front and back and left and right"
+ time.sleep(1000)
+ motor3(motorPin1,motorPin2,motorPin3,motorPin4)
+
+
+def sonarsensor( pinMode ):
+ GPIO.setup(trigPin,GPIO.OUT)
+ GPIO.output(trigPin,GPIO.LOW)
+ time.sleep(1)
+ GPIO.output(trigPin,GPIO.HIGH)
+ time.sleep(2)
+ GPIO.output(trigPin,GPIO.LOW)
+ GPIO.setup(echoPin,INPUT)
+ distance = pulse_duration * 17150        #Multiply pulse duration by 17150 to get distance
+ distance = round(distance, 2)            #Round to two decimal points
+
+pinMode=[trigPin,echoPin]
+
+def motor( m2 ):
+ GPIO.setup(m2,GPIO.OUT)
+ GPIO.output(m2,GPIO.HIGH)
+ time.sleep(1)
+ GPIO.output(m2,LOW)
+
+def motor3(z) :
+ GPIO.setup(m1,GPIO.OUT)
+ GPIO.setup(m2,GPIO.OUT)
+ GPIO.setup(m3,GPIO.OUT)
+ GPIO.setup(m4,GPIO.OUT)
+ GPIO.output(m1,GPIO.HIGH)
+ GPIO.output(m2,GPIO.HIGH)
+ GPIO.output(m3,GPIO.HIGH)
+ GPIO.output(m4,GPIO.HIGH)
+ time.sleep(1)
+ GPIO.output(m1,GPIO.LOW)
+ GPIO.output(m2,GPIO.LOW)
+ GPIO.output(m3,GPIO.LOW)
+ GPIO.output(m4,GPIO.LOW)
+
+z=[m1,m2,m3,m4] 
